@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/lessonsFragment">
+
+    <fragment
+        android:id="@+id/repeatWordFragment"
+        android:name="com.easyprog.peil.fragments.repeat_word.RepeatWordFragment"
+        android:label="fragment_repeat_word"
+        tools:layout="@layout/fragment_repeat_word" />
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.easyprog.peil.fragments.community.CommunityFragment"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.easyprog.peil.fragments.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.easyprog.peil.fragments.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/lessonsFragment"
+        android:name="com.easyprog.peil.fragments.lessons_list.LessonsListFragment"
+        android:label="fragment_lessons"
+        tools:layout="@layout/fragment_lessons_list" />
+</navigation>
