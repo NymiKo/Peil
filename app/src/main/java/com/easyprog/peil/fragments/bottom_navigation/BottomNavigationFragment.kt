@@ -1,4 +1,4 @@
-package com.easyprog.peil.fragments
+package com.easyprog.peil.fragments.bottom_navigation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,6 @@ import com.easyprog.peil.fragments.community.CommunityFragment
 import com.easyprog.peil.fragments.lessons_list.LessonsListFragment
 import com.easyprog.peil.fragments.repeat_word.RepeatWordFragment
 import com.google.android.material.transition.Hold
-import com.google.android.material.transition.MaterialElevationScale
 import kotlinx.parcelize.Parcelize
 
 class BottomNavigationFragment : BaseFragment() {

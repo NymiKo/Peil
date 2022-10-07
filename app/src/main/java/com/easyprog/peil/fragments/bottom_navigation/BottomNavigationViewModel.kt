@@ -1,4 +1,4 @@
-package com.easyprog.peil.fragments
+package com.easyprog.peil.fragments.bottom_navigation
 
 import androidx.lifecycle.SavedStateHandle
 import com.easyprog.core.views.BaseViewModel

@@ -13,4 +13,5 @@
     <color name="grey_separator">#303539</color>
     <color name="black_opacity">#72000000</color>
     <color name="green">#16D800</color>
+    <color name="red">#D32F2F</color>
 </resources>
