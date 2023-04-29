@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 import com.easyprog.core.ARG_SCREEN
@@ -22,21 +23,11 @@ import com.easyprog.peil.databinding.FragmentLessonsListBinding
 import com.easyprog.peil.fragments.lesson.LessonFragment
 import com.google.android.material.transition.Hold
 import com.google.android.material.transition.MaterialElevationScale
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
 
-//@AndroidEntryPoint
-class LessonsListFragment : BaseFragment() {
-
-    @Parcelize
-    class Screen: BaseScreen
-
-    companion object {
-        fun setScreen(): LessonsListFragment {
-            return LessonsListFragment().apply {
-                arguments = bundleOf(ARG_SCREEN to Screen())
-            }
-        }
-    }
+@AndroidEntryPoint
+class LessonsListFragment : Fragment() {
 
     //binding
     private var _binding: FragmentLessonsListBinding? = null
@@ -47,8 +38,12 @@ class LessonsListFragment : BaseFragment() {
     private var mLayoutManager: LinearLayoutManager? = null
 
     //viewModel
-    override val viewModel by screenViewModel<LessonsListViewModel>()
+    private val viewModel by viewModels<LessonsListViewModel>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getData()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,8 +66,10 @@ class LessonsListFragment : BaseFragment() {
             override fun onLessonDetails(lesson: Lesson, view: View) {
 //                viewModel.onLessonPressed(lesson)
                 viewModel.setExpandedLessons(mAdapter.expandedItems)
-                val fragment = LessonFragment.Screen(lesson).javaClass.enclosingClass.newInstance() as Fragment
-                fragment.arguments = bundleOf(ARG_SCREEN to LessonFragment.Screen(lesson))
+                val fragment = LessonFragment()
+                fragment.arguments = Bundle().apply {
+                    putParcelable("lesson", lesson)
+                }
                 (activity as MainActivity).supportFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
                     .addSharedElement(view, view.transitionName)

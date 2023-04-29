@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.easyprog.peil.R
 import com.easyprog.core.views.BaseFragment
 import com.easyprog.core.views.BaseScreen
@@ -16,14 +17,10 @@ import com.easyprog.peil.fragments.repeat_word.RepeatWordFragment
 import com.google.android.material.transition.Hold
 import kotlinx.parcelize.Parcelize
 
-class BottomNavigationFragment : BaseFragment() {
-
-    @Parcelize
-    class Screen : BaseScreen
+class BottomNavigationFragment : Fragment() {
 
     private var _binding: FragmentBottomNavigationBinding? = null
     private val binding get() = _binding!!
-    override val viewModel by screenViewModel<BottomNavigationViewModel>()
     private lateinit var mAdapterViewPager: BottomNavigationViewPagerAdapter
 
     override fun onCreateView(

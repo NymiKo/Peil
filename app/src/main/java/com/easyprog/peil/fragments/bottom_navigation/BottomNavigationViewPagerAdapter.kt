@@ -13,7 +13,7 @@ class BottomNavigationViewPagerAdapter(fragment: Fragment) :
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> LessonsListFragment.setScreen()
+            0 -> LessonsListFragment()
             1 -> RepeatWordFragment()
             2 -> CommunityFragment()
             else -> LessonsListFragment()

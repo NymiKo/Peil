@@ -1,12 +1,12 @@
 package com.easyprog.peil.fragments.repeat_word
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import com.easyprog.core.views.BaseViewModel
 import com.easyprog.core.navigator.Navigator
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class RepeatWordViewModel(
-    private val navigator: Navigator,
-    savedStateHandle: SavedStateHandle,
-    screen: RepeatWordFragment.Screen
-): BaseViewModel() {
+@HiltViewModel
+class RepeatWordViewModel @Inject constructor(): ViewModel() {
 }

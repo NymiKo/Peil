@@ -3,33 +3,25 @@ package com.easyprog.peil.fragments
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import com.easyprog.core.navigator.Navigator
 import com.easyprog.core.utils.Event
 import com.easyprog.core.views.BaseViewModel
 import com.easyprog.peil.data.models.LessonLearningSteps
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class LearningLessonViewModel(
-    private val navigator: Navigator,
-    savedStateHandle: SavedStateHandle,
-    screen: LearningLessonFragment.Screen
-) : BaseViewModel() {
-
-    private val _lessonDetailId = MutableLiveData<Event<Int>>()
-    val lessonDetailId: LiveData<Event<Int>> = _lessonDetailId
+@HiltViewModel
+class LearningLessonViewModel @Inject constructor() : ViewModel() {
 
     private val _learningLessonStepsList = MutableLiveData<List<LessonLearningSteps>>()
     val learningLessonStepsList: LiveData<List<LessonLearningSteps>> = _learningLessonStepsList
 
-    init {
-        _lessonDetailId.value = Event(screen.idLessonDetail)
-        getData(screen.idLessonDetail)
-    }
-
-    private fun getData(idLessonDetails: Int) {
+    fun getData(idLessonDetails: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val data = createLearningLessonSteps()
             val filterData = ArrayList<LessonLearningSteps>()
@@ -69,9 +61,5 @@ class LearningLessonViewModel(
         )
 
         return mockData
-    }
-
-    fun onBackPressed() {
-        navigator.goBack()
     }
 }

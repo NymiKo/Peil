@@ -1,36 +1,31 @@
 package com.easyprog.peil.fragments.lessons_list
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import com.easyprog.peil.R
 import com.easyprog.core.views.BaseViewModel
 import com.easyprog.peil.data.models.Lesson
 import com.easyprog.peil.fragments.lesson.LessonFragment
 import com.easyprog.core.navigator.Navigator
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-//@HiltViewModel
-class LessonsListViewModel @Inject constructor(
-    private val navigator: Navigator,
-    savedStateHandle: SavedStateHandle,
-    screen: LessonsListFragment.Screen
-): BaseViewModel() {
+@HiltViewModel
+class LessonsListViewModel @Inject constructor(): ViewModel() {
 
-    private val _lessonsList = savedStateHandle.getLiveData<List<Lesson>>("lessons")
+    private val _lessonsList = MutableLiveData<List<Lesson>>()
     val lessonsList: LiveData<List<Lesson>> = _lessonsList
 
-    private val _expandedLessons = savedStateHandle.getLiveData<List<Lesson>>("expanded_lessons")
+    private val _expandedLessons = MutableLiveData<List<Lesson>>()
     val expandedLessons: LiveData<List<Lesson>> = _expandedLessons
 
-    init {
-        getData()
-    }
-
-    private fun getData() {
+    fun getData() {
         CoroutineScope(Dispatchers.IO).launch {
             val data = createData()
             withContext(Dispatchers.Main) {
@@ -41,10 +36,6 @@ class LessonsListViewModel @Inject constructor(
 
     fun setExpandedLessons(expandedLessons: List<Lesson>) {
         _expandedLessons.value = expandedLessons
-    }
-
-    fun onLessonPressed(lesson: Lesson) {
-        navigator.launch(LessonFragment.Screen(lesson))
     }
 
     private fun createData(): List<Lesson> {

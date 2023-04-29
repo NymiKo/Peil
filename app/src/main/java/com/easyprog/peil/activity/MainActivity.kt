@@ -15,7 +15,7 @@ import com.easyprog.peil.fragments.bottom_navigation.BottomNavigationFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), FragmentsHolder {
+class MainActivity : AppCompatActivity() {
 
 //    private lateinit var navController: NavController
 //    private lateinit var appBarConfiguration: AppBarConfiguration
@@ -23,38 +23,14 @@ class MainActivity : AppCompatActivity(), FragmentsHolder {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var navigator: StackFragmentNavigator
-
-    private val activityViewModel by viewModelCreator<ActivityScopeViewModel> {
-        ActivityScopeViewModel(
-            uiActions = AndroidUiActions(applicationContext),
-            navigator = IntermediateNavigator()
-        )
-    }
-
-    override fun getActivityScopeViewModel(): ActivityScopeViewModel {
-        return activityViewModel
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupBinding()
-        createAndSetupNavigator(savedInstanceState)
-        setupView()
         setContentView(binding.root)
     }
 
     private fun setupBinding() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
-    }
-
-    private fun createAndSetupNavigator(savedInstanceState: Bundle?) {
-        navigator = StackFragmentNavigator(
-            activity = this,
-            containerId = R.id.nav_host_fragment_container,
-            initialScreenCreator = { BottomNavigationFragment.Screen() }
-        )
-        navigator.onCreate(savedInstanceState)
     }
 
     private fun setupView() {
@@ -65,23 +41,9 @@ class MainActivity : AppCompatActivity(), FragmentsHolder {
 //        binding.bottomNavigationView.setupWithNavController(navController)
     }
 
-    override fun onResume() {
-        super.onResume()
-        setTargetNavigator(navigator)
-    }
-
-    private fun setTargetNavigator(navigator: Navigator?) {
-        activityViewModel.navigator.setTarget(navigator)
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
-    }
-
-    override fun onPause() {
-        super.onPause()
-        setTargetNavigator(null)
     }
 
     override fun onDestroy() {
@@ -91,6 +53,5 @@ class MainActivity : AppCompatActivity(), FragmentsHolder {
 
     private fun disabledElements() {
         _binding = null
-        navigator.onDestroy()
     }
 }

@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.easyprog.peil.R
 import com.easyprog.core.views.BaseFragment
 import com.easyprog.core.views.BaseScreen
 import com.easyprog.core.views.screenViewModel
 import kotlinx.parcelize.Parcelize
 
-class RepeatWordFragment : BaseFragment() {
+class RepeatWordFragment : Fragment() {
 
-    @Parcelize
-    class Screen: BaseScreen
-
-    override val viewModel by screenViewModel<RepeatWordViewModel>()
+    private val viewModel by viewModels<RepeatWordViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
