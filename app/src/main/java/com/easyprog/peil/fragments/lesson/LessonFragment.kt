@@ -15,10 +15,12 @@ import com.easyprog.core.views.BaseFragment
 import com.easyprog.core.views.BaseScreen
 import com.easyprog.core.views.screenViewModel
 import com.easyprog.peil.R
+import com.easyprog.peil.activity.MainActivity
 import com.easyprog.peil.adapters.viewpager.LearningDetailsActionListener
 import com.easyprog.peil.adapters.viewpager.LessonDetailsAdapter
 import com.easyprog.peil.data.models.Lesson
 import com.easyprog.peil.databinding.FragmentLessonBinding
+import com.easyprog.peil.fragments.LearningLessonFragment
 import com.easyprog.peil.fragments.lessons_list.LessonsListFragment
 import com.google.android.material.transition.MaterialContainerTransform
 import com.squareup.picasso.Picasso
@@ -94,7 +96,15 @@ class LessonFragment : Fragment() {
     private fun setupAdapter() {
         mAdapter = LessonDetailsAdapter(object : LearningDetailsActionListener {
             override fun onLearningLesson(lessonDetailsId: Int) {
-                findNavController().navigate(R.id.action_lessonFragment_to_learningLessonFragment, bundleOf("lesson_id" to lessonDetailsId))
+                val fragment = LearningLessonFragment()
+                fragment.arguments = Bundle().apply {
+                    putInt("lesson_id", lessonDetailsId)
+                }
+                (activity as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
+                //findNavController().navigate(R.id.learningLessonFragment, bundleOf("lesson_id" to lessonDetailsId))
             }
         })
     }

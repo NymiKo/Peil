@@ -50,7 +50,7 @@ class LessonsListAdapter(
             Picasso.get().load(lesson.iconUrl)
                 .placeholder(R.drawable.ic_baseline_do_not_disturb_alt)
                 .into(imageViewIconLesson)
-            textNumberLesson.text = lesson.number
+            textNumberLesson.text = "Урок ${lesson.number}"
             textNameLesson.text = lesson.name
             textDescriptionLesson.text = lesson.description
             textTimeLesson.text = lesson.time

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "766013557414",
+    "project_id": "peil-d2614",
+    "storage_bucket": "peil-d2614.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766013557414:android:3991639898c9e6e0928267",
+        "android_client_info": {
+          "package_name": "com.easyprog.peil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "766013557414-ce772viodlk1eg47lddaohkfal30v5bn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlrsfE7Zl-nJ8teSRK7wE3G9BWFJE4s6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "766013557414-ce772viodlk1eg47lddaohkfal30v5bn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

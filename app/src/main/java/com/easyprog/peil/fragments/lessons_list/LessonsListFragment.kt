@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
@@ -55,6 +56,7 @@ class LessonsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getResult()
         mLayoutManager = LinearLayoutManager(requireContext())
         setupAdapter()
         setupView()
@@ -89,19 +91,27 @@ class LessonsListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         binding.recyclerLessonList.layoutManager = mLayoutManager
-        binding.recyclerLessonList.adapter = mAdapter.apply {
-            viewModel.lessonsList.observe(viewLifecycleOwner) {
-                mAdapter.mLessonsList = it as ArrayList
-            }
-            viewModel.expandedLessons.observe(viewLifecycleOwner) {
-                mAdapter.expandedItems = it as ArrayList
-            }
-        }
+        binding.recyclerLessonList.adapter = mAdapter
         mAdapter.stateRestorationPolicy = PREVENT_WHEN_EMPTY
 //        val itemAnimator = binding.recyclerLessonList.itemAnimator
 //        if (itemAnimator is DefaultItemAnimator) {
 //            itemAnimator.supportsChangeAnimations = false
 //        }
+    }
+
+    private fun getResult() {
+        viewModel.lessonsList.observe(viewLifecycleOwner) { result ->
+            when(result) {
+                com.easyprog.peil.data.Result.LOADING -> {
+                }
+                is com.easyprog.peil.data.Result.ERROR -> {
+                    Toast.makeText(requireContext(), "Ошибка", Toast.LENGTH_SHORT).show()
+                }
+                is com.easyprog.peil.data.Result.SUCCESS -> {
+                    mAdapter.mLessonsList = result.data
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
