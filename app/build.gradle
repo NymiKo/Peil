@@ -55,8 +55,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     // Picasso
-    def picassoVersion = '2.71828'
-    implementation "com.squareup.picasso:picasso:$picassoVersion"
+    def glideVersion = '4.15.1'
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     //Hilt
     def hiltVersion = '2.44'

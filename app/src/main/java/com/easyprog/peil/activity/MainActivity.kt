@@ -17,41 +17,17 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-//    private lateinit var navController: NavController
-//    private lateinit var appBarConfiguration: AppBarConfiguration
-
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupBinding()
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
-    private fun setupBinding() {
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-    }
-
-    private fun setupView() {
-        //setup bottom navigation
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
-//        navController = navHostFragment.navController
-//        binding.bottomNavigationView.setupWithNavController(navController)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
-
     override fun onDestroy() {
-        disabledElements()
-        super.onDestroy()
-    }
-
-    private fun disabledElements() {
         _binding = null
+        super.onDestroy()
     }
 }

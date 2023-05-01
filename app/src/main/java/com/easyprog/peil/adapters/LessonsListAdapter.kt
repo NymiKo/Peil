@@ -4,17 +4,11 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
-import androidx.core.animation.doOnEnd
-import androidx.core.animation.doOnStart
-import androidx.core.view.doOnLayout
-import androidx.core.view.doOnNextLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.easyprog.peil.R
+import com.easyprog.core.utils.loadImage
 import com.easyprog.peil.data.models.Lesson
 import com.easyprog.peil.databinding.ItemLessonBinding
-import com.squareup.picasso.Picasso
 
 class LessonsListAdapter(
     private val actionListener: LessonActionListener
@@ -47,14 +41,12 @@ class LessonsListAdapter(
         val isExpanded = expandedItems.contains(lesson)
         with(holder.binding) {
             cardExpandView.tag = lesson
-            Picasso.get().load(lesson.iconUrl)
-                .placeholder(R.drawable.ic_baseline_do_not_disturb_alt)
-                .into(imageViewIconLesson)
+            imageViewIconLesson.loadImage(lesson.iconUrl)
             textNumberLesson.text = "Урок ${lesson.number}"
             textNameLesson.text = lesson.name
             textDescriptionLesson.text = lesson.description
             textTimeLesson.text = lesson.time
-            Picasso.get().load(lesson.imageUrl).fit().centerCrop().into(imageViewImageLesson)
+            imageViewImageLesson.loadImage(lesson.imageUrl)
 
             cardExpandView.isVisible = isExpanded
             separator.isVisible = !isExpanded

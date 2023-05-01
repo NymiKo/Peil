@@ -41,12 +41,12 @@ class LessonViewModel @Inject constructor(): ViewModel() {
 
     private fun createLessonDetails(): List<LessonDetails> {
         val mockData: MutableList<LessonDetails> = ArrayList()
-        mockData.add(LessonDetails(0, "Словарь", "Выучи новые слова и выражения.", false, "0"))
+        mockData.add(LessonDetails(0, "Словарь", "Выучи новые слова и выражения.", false, "Y74RqgWKEQl706JdE1yS"))
         mockData.add(LessonDetails(9, "Запоминай", "Закрепи свои знания новых слов и выражений", false, "2"))
         mockData.add(LessonDetails(11, "Тест", "Првоерь, хорошо ли тобой усвоен изученный материал.", false, "2"))
-        mockData.add(LessonDetails(3, "Словарь", "Выучи новые слова и выражения.", true, "1"))
-        mockData.add(LessonDetails(4, "Практикуйся", "Строй предложения и используй язык в контексте", true, "1"))
-        mockData.add(LessonDetails(5, "Тест", "Првоерь, хорошо ли тобой усвоен изученный материал.", false, "1"))
+        mockData.add(LessonDetails(3, "Словарь", "Выучи новые слова и выражения.", true, "m5gheGjGUr54zfu0n7Vj"))
+        mockData.add(LessonDetails(4, "Практикуйся", "Строй предложения и используй язык в контексте", true, "m5gheGjGUr54zfu0n7Vj"))
+        mockData.add(LessonDetails(5, "Тест", "Првоерь, хорошо ли тобой усвоен изученный материал.", false, "m5gheGjGUr54zfu0n7Vj"))
 
         return mockData
     }

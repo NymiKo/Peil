@@ -68,7 +68,7 @@ class LearningLessonFragment : Fragment() {
                 if (mAdapter.mLessonLearningSteps.lastIndex != binding.viewPagerLearningLesson.currentItem) {
                     binding.viewPagerLearningLesson.currentItem += 1
                 } else {
-
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
                 }
             }
         })
@@ -83,7 +83,7 @@ class LearningLessonFragment : Fragment() {
     private fun dialogExit() {
         DialogExitLearningLesson(object : DialogListener{
             override fun onDialogNegativeClick(dialog: DialogFragment) {
-
+                requireActivity().onBackPressedDispatcher.onBackPressed()
             }
         }).show(childFragmentManager, "DialogExit")
     }

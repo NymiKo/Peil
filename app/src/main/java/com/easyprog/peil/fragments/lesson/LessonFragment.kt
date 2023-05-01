@@ -8,12 +8,8 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.easyprog.core.ARG_SCREEN
-import com.easyprog.core.views.BaseFragment
-import com.easyprog.core.views.BaseScreen
-import com.easyprog.core.views.screenViewModel
+import com.easyprog.core.utils.loadImage
 import com.easyprog.peil.R
 import com.easyprog.peil.activity.MainActivity
 import com.easyprog.peil.adapters.viewpager.LearningDetailsActionListener
@@ -21,10 +17,7 @@ import com.easyprog.peil.adapters.viewpager.LessonDetailsAdapter
 import com.easyprog.peil.data.models.Lesson
 import com.easyprog.peil.databinding.FragmentLessonBinding
 import com.easyprog.peil.fragments.LearningLessonFragment
-import com.easyprog.peil.fragments.lessons_list.LessonsListFragment
 import com.google.android.material.transition.MaterialContainerTransform
-import com.squareup.picasso.Picasso
-import kotlinx.parcelize.Parcelize
 
 class LessonFragment : Fragment() {
 
@@ -62,8 +55,11 @@ class LessonFragment : Fragment() {
         binding.toolbar.apply {
             title = lesson.name
             subtitle = lesson.description
+            setNavigationOnClickListener {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
         }
-        Picasso.get().load(lesson.imageUrl).resize(750, 500).into(binding.imageViewParallax)
+        binding.imageViewParallax.loadImage(lesson.imageUrl)
         binding.viewPagerLessonDetails.adapter = mAdapter.apply {
             viewModel.lessonDetails.observe(viewLifecycleOwner) {
                 mAdapter.mLessonsDetailsList = it
