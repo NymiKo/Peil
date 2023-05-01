@@ -2,6 +2,7 @@ package com.easyprog.peil.adapters.learnong_lesson_viewpager
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -64,10 +65,16 @@ class LearningLessonAdapter(
             with(binding) {
                 textPhrase.text = model.lessonPhrase
                 textNewWord.text = model.newWord
-                textNewWordTranslation.text = HtmlCompat.fromHtml(
-                    model.description,
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                )
+                if (!model.practice) {
+                    textNewWordTranslation.text = HtmlCompat.fromHtml(
+                        model.description,
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                } else {
+                    textNewWordTranslation.text = "Попытайся выполнить упражнение самостоятельно, а затем посмотри подсказку."
+                    textExpandedHint.visibility = View.VISIBLE
+                    textExpandedHint.text = model.description
+                }
                 buttonContinue.setOnClickListener { listener.nextStepLesson() }
             }
         }

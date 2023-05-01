@@ -83,11 +83,12 @@ class LearningLessonFragment : Fragment() {
     }
 
     private fun dialogExit() {
-        DialogExitLearningLesson(object : DialogListener{
-            override fun onDialogNegativeClick(dialog: DialogFragment) {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
-            }
-        }).show(childFragmentManager, "DialogExit")
+        requireActivity().onBackPressedDispatcher.onBackPressed()
+//        DialogExitLearningLesson(object : DialogListener{
+//            override fun onDialogNegativeClick(dialog: DialogFragment) {
+//                requireActivity().onBackPressedDispatcher.onBackPressed()
+//            }
+//        }).show(childFragmentManager, "DialogExit")
     }
 
     override fun onDestroyView() {

@@ -23,6 +23,7 @@
             android:src="@drawable/ic_baseline_download"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
             app:tint="@color/blue" />
 
         <TextView

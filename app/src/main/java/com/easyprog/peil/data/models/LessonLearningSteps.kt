@@ -5,5 +5,6 @@ data class LessonLearningSteps(
     val lessonPhrase: String = "",
     val newWord: String = "",
     val description: String = "",
+    val practice: Boolean = false,
     val typeView: Int = 0
 )
