@@ -1,5 +1,7 @@
 package com.easyprog.peil.di.modules
 
+import com.easyprog.peil.fragments.learning_lesson.LearningLessonRepository
+import com.easyprog.peil.fragments.learning_lesson.LearningLessonRepositoryImpl
 import com.easyprog.peil.fragments.lessons_list.LessonsListRepository
 import com.easyprog.peil.fragments.lessons_list.LessonsListRepositoryImpl
 import dagger.Binds
@@ -15,4 +17,8 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun provideLessonsListRepository(lessonsListRepositoryImpl: LessonsListRepositoryImpl): LessonsListRepository
+
+    @Singleton
+    @Binds
+    abstract fun provideLearningLessonRepository(learningLessonRepositoryImpl: LearningLessonRepositoryImpl): LearningLessonRepository
 }

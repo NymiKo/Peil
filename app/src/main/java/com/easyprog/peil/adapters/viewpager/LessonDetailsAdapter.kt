@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.peil.R
 import com.easyprog.peil.adapters.viewpager.LessonDetailsAdapter.LessonDetailsViewHolder
+import com.easyprog.peil.data.models.Lesson
 import com.easyprog.peil.data.models.LessonDetails
 import com.easyprog.peil.databinding.ItemLessonDetailsBinding
 
@@ -14,7 +15,7 @@ class LessonDetailsAdapter(
     private val actionListener: LearningDetailsActionListener
 ) : RecyclerView.Adapter<LessonDetailsViewHolder>(), View.OnClickListener {
 
-    var mLessonsDetailsList: List<LessonDetails> = emptyList()
+    var mLessonsDetailsList: List<Lesson> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
         set(newValue) {
             field = newValue
@@ -34,7 +35,7 @@ class LessonDetailsAdapter(
         val lessonDetails = mLessonsDetailsList[position]
         with(holder.binding) {
             textDescription.text = lessonDetails.description
-            textNameLesson.text = lessonDetails.name
+            //textNameLesson.text = lessonDetails.name
             buttonStartOrRepeat.tag = lessonDetails
             if (lessonDetails.lessonLearned) {
                 buttonStartOrRepeat.setBackgroundResource(R.drawable.button_lesson_repeat)
@@ -49,7 +50,7 @@ class LessonDetailsAdapter(
         RecyclerView.ViewHolder(binding.root)
 
     override fun onClick(view: View) {
-        val lessonDetailId = view.tag as LessonDetails
+        val lessonDetailId = view.tag as Lesson
         actionListener.onLearningLesson(lessonDetailId.id)
     }
 

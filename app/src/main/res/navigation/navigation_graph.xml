@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/learningLessonFragment"
-        android:name="com.easyprog.peil.fragments.LearningLessonFragment"
+        android:name="com.easyprog.peil.fragments.learning_lesson.LearningLessonFragment"
         android:label="fragment_learning_lesson"
         tools:layout="@layout/fragment_learning_lesson" />
     <fragment

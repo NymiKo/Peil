@@ -1,6 +1,7 @@
 package com.easyprog.peil.data
 
 import com.easyprog.peil.data.models.Lesson
+import com.easyprog.peil.data.models.LessonLearningSteps
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -12,6 +13,8 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
 
     private companion object {
         private const val COLLECTION_LESSONS = "lessons"
+        private const val COLLECTION_SUBLESSONS = "sublessons"
+        private const val FIELD_ID_LESSON = "idLesson"
     }
 
     private lateinit var firestore: FirebaseFirestore
@@ -25,6 +28,11 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
 
     override suspend fun getLessonsList(): Result<List<Lesson>> {
         val snapshot = getFirestore().collection(COLLECTION_LESSONS).orderBy("number").get().await()
+        return getResult(snapshot)
+    }
+
+    override suspend fun getLessonsDetails(idLesson: String): Result<List<LessonLearningSteps>> {
+        val snapshot = getFirestore().collection(COLLECTION_SUBLESSONS).whereEqualTo(FIELD_ID_LESSON, idLesson).get().await()
         return getResult(snapshot)
     }
 

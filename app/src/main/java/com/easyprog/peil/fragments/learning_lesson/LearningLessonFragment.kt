@@ -1,28 +1,20 @@
-package com.easyprog.peil.fragments
+package com.easyprog.peil.fragments.learning_lesson
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.easyprog.core.views.BaseFragment
-import com.easyprog.core.views.BaseScreen
-import com.easyprog.core.views.screenViewModel
-import com.easyprog.peil.R
 import com.easyprog.peil.adapters.learnong_lesson_viewpager.LearningLessonActionListener
 import com.easyprog.peil.adapters.learnong_lesson_viewpager.LearningLessonAdapter
-import com.easyprog.peil.data.models.Lesson
 import com.easyprog.peil.databinding.FragmentLearningLessonBinding
 import com.easyprog.peil.fragments.dialog_exit_learning_lesson.DialogExitLearningLesson
 import com.easyprog.peil.fragments.dialog_exit_learning_lesson.DialogListener
-import com.easyprog.peil.fragments.lesson.LessonFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.parcelize.Parcelize
 
 @AndroidEntryPoint
 class LearningLessonFragment : Fragment() {
@@ -34,11 +26,11 @@ class LearningLessonFragment : Fragment() {
 
     private val viewModel by viewModels<LearningLessonViewModel>()
 
-    private val idLessonDetails get() = requireArguments().getInt(ARG_LESSON_ID)
+    private val idLesson get() = requireArguments().getString(ARG_LESSON_ID)!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getData(idLessonDetails)
+        viewModel.getData(idLesson)
     }
 
     override fun onCreateView(
@@ -73,8 +65,18 @@ class LearningLessonFragment : Fragment() {
             }
         })
         binding.viewPagerLearningLesson.adapter = mAdapter.apply {
-            viewModel.learningLessonStepsList.observe(viewLifecycleOwner) {
-                mAdapter.mLessonLearningSteps = it
+            viewModel.learningLessonStepsList.observe(viewLifecycleOwner) { result ->
+                when(result) {
+                    com.easyprog.peil.data.Result.LOADING -> {
+
+                    }
+                    is com.easyprog.peil.data.Result.ERROR -> {
+                        Toast.makeText(requireContext(), "Ошибка", Toast.LENGTH_SHORT).show()
+                    }
+                    is com.easyprog.peil.data.Result.SUCCESS -> {
+                        mAdapter.mLessonLearningSteps = result.data
+                    }
+                }
             }
         }
         binding.viewPagerLearningLesson.isUserInputEnabled = false
@@ -96,9 +98,9 @@ class LearningLessonFragment : Fragment() {
 
     companion object {
         private const val ARG_LESSON_ID = "lesson_id"
-        fun newInstance(idLessonDetails: Int): LearningLessonFragment {
+        fun newInstance(idLesson: String): LearningLessonFragment {
             return LearningLessonFragment().apply {
-                arguments = bundleOf(ARG_LESSON_ID to idLessonDetails)
+                arguments = bundleOf(ARG_LESSON_ID to idLesson)
             }
         }
     }

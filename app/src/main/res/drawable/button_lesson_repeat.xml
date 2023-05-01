@@ -3,7 +3,8 @@
 
     <item>
         <shape>
-            <solid android:color="@color/light_grey"/>
+            <solid android:color="@android:color/transparent"/>
+            <stroke android:width="2dp" android:color="@color/black"/>
             <corners android:radius="30dp"/>
         </shape>
     </item>

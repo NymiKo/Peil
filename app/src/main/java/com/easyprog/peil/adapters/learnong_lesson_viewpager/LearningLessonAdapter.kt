@@ -3,6 +3,7 @@ package com.easyprog.peil.adapters.learnong_lesson_viewpager
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.peil.data.models.LessonLearningSteps
 import com.easyprog.peil.databinding.ItemLearningLessonQuestionTranslateBinding
@@ -62,8 +63,11 @@ class LearningLessonAdapter(
         fun bind(model: LessonLearningSteps) {
             with(binding) {
                 textPhrase.text = model.lessonPhrase
-                textNewWord.text = model.newWorld
-                textNewWordTranslation.text = model.newWorldTranslate
+                textNewWord.text = model.newWord
+                textNewWordTranslation.text = HtmlCompat.fromHtml(
+                    model.description,
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
                 buttonContinue.setOnClickListener { listener.nextStepLesson() }
             }
         }
@@ -76,8 +80,8 @@ class LearningLessonAdapter(
         fun bind(model: LessonLearningSteps) {
             with(binding) {
                 textQuestion.text = model.lessonPhrase
-                textWordForTranslate.text = model.newWorld
-                textQuestionTranslate.text = model.newWorldTranslate
+                textWordForTranslate.text = model.newWord
+                textQuestionTranslate.text = model.description
                 buttonContinue.setOnClickListener { listener.nextStepLesson() }
             }
         }

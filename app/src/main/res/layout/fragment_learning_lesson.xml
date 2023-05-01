@@ -6,7 +6,7 @@
     android:background="@color/dark_grey"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.LearningLessonFragment">
+    tools:context=".fragments.learning_lesson.LearningLessonFragment">
 
     <Toolbar
         android:id="@+id/app_bar_layout"

@@ -5,6 +5,6 @@ import com.easyprog.peil.data.models.Lesson
 
 interface LearningDetailsActionListener {
 
-    fun onLearningLesson(lessonDetailsId: Int)
+    fun onLearningLesson(lessonDetailsId: String)
 
 }

@@ -16,7 +16,7 @@ import com.easyprog.peil.adapters.viewpager.LearningDetailsActionListener
 import com.easyprog.peil.adapters.viewpager.LessonDetailsAdapter
 import com.easyprog.peil.data.models.Lesson
 import com.easyprog.peil.databinding.FragmentLessonBinding
-import com.easyprog.peil.fragments.LearningLessonFragment
+import com.easyprog.peil.fragments.learning_lesson.LearningLessonFragment
 import com.google.android.material.transition.MaterialContainerTransform
 
 class LessonFragment : Fragment() {
@@ -53,17 +53,15 @@ class LessonFragment : Fragment() {
         setupAdapter()
         binding.fragmentContainer.transitionName = "lesson_card_${lesson.id}"
         binding.toolbar.apply {
-            title = lesson.name
-            subtitle = lesson.description
+            title = getString(R.string.title_toolbar_lesson, lesson.number, lesson.name)
+            subtitle = lesson.subtitle
             setNavigationOnClickListener {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             }
         }
         binding.imageViewParallax.loadImage(lesson.imageUrl)
         binding.viewPagerLessonDetails.adapter = mAdapter.apply {
-            viewModel.lessonDetails.observe(viewLifecycleOwner) {
-                mAdapter.mLessonsDetailsList = it
-            }
+            mAdapter.mLessonsDetailsList = listOf(lesson)
         }
 
         binding.viewPagerLessonDetails.registerOnPageChangeCallback(object :
@@ -91,10 +89,10 @@ class LessonFragment : Fragment() {
 
     private fun setupAdapter() {
         mAdapter = LessonDetailsAdapter(object : LearningDetailsActionListener {
-            override fun onLearningLesson(lessonDetailsId: Int) {
+            override fun onLearningLesson(lessonDetailsId: String) {
                 val fragment = LearningLessonFragment()
                 fragment.arguments = Bundle().apply {
-                    putInt("lesson_id", lessonDetailsId)
+                    putString("lesson_id", lessonDetailsId)
                 }
                 (activity as MainActivity).supportFragmentManager.beginTransaction()
                     .replace(R.id.nav_host_fragment_container, fragment)

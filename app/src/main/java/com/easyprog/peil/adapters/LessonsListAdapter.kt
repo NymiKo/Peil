@@ -44,7 +44,7 @@ class LessonsListAdapter(
             imageViewIconLesson.loadImage(lesson.iconUrl)
             textNumberLesson.text = "Урок ${lesson.number}"
             textNameLesson.text = lesson.name
-            textDescriptionLesson.text = lesson.description
+            textDescriptionLesson.text = lesson.subtitle
             textTimeLesson.text = lesson.time
             imageViewImageLesson.loadImage(lesson.imageUrl)
 
